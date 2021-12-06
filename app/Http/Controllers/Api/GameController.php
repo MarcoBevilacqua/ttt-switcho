@@ -56,13 +56,16 @@ class GameController extends Controller
         $status = $game->status;
         $status[$updateGameRequest->place] = $updateGameRequest->player;
         $game->last_move_played_by = $updateGameRequest->player;
+        $game->status = $status;
 
         try {
-            $game->status = $status;
             $game->save();
         } catch (\Exception $exception) {
             Log::error("An error occurred updating the game: {$exception->getMessage()}");
-            return response()->json(['message' => 'An error occurred updating the game: ' . $exception->getMessage()], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->json(
+                ['message' => 'An error occurred updating the game: ' . $exception->getMessage()],
+                HttpResponse::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
 
         //check if player has won and return response
