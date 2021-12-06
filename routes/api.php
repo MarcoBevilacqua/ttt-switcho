@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('game')->group(function () {
     Route::post('new', [GameController::class, 'store']);
-    Route::put('move', [GameController::class, 'update']);
+    Route::put('{gameId}/move', [GameController::class, 'update']);
 });

@@ -13,7 +13,7 @@ class UpdateGameRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateGameRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "player" => "required|numeric|in:1,2",
+            "place" => "required|numeric|between:0,8"
         ];
     }
 }

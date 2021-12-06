@@ -14,9 +14,12 @@ class CreateGamesTable extends Migration
     public function up()
     {
         Schema::create('games', function (Blueprint $table) {
+            $table->id();
             $table->uuid("uuid");
             $table->json("status");
+            $table->unsignedTinyInteger('last_move_played_by');
             $table->unsignedTinyInteger("winner")->default(0); //can be 1 or 2
+            $table->timestamps();
         });
     }
 
