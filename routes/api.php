@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('game', function () {
-    return response()->json("ok");
+Route::prefix('game')->group(function () {
+    Route::post('new', [GameController::class, 'store']);
+    Route::put('move', [GameController::class, 'update']);
 });
